@@ -1,0 +1,19 @@
+.table-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+    
+
+.table{
+    border-width: 1px;
+    border-style: solid;
+    border-color: blue;
+}
+
+.DeleteButton{
+    display: flex;
+    align-items: flex-start;
+    justify-content: end;
+
+}

@@ -1,0 +1,42 @@
+.nav {
+    align-items: center;
+}
+
+
+.pagination {
+    display: inline-block;
+    align-items: center;
+}
+
+.page-item {
+    display: inline;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    align-items: center;
+    
+}
+
+.page-item :active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.page-item a {
+    padding: 5px 10px;
+    text-decoration:none;
+    color: white;
+    height: 25px;
+    width: 25px;
+    padding: 10px;
+    margin: 0px 6px;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    background-color: #00B2FF;
+    
+
+}
+
+
+  

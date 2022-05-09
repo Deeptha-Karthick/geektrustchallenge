@@ -12,12 +12,16 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { ContentCutOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import Editicon from "./editicon";
+import "./Table1.css";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 let checkedrow = [];
 
 export default function Table1({ detail, setDetail }) {
   const [maincheck, setMaincheck] = useState(false);
+
+  //const [mainsubcheck, setMainsubcheck] = useState(false);
 
   const head = ["Name", "Email", "Role", "Actions"];
   const rows1 = detail.map((row) => {
@@ -56,8 +60,12 @@ export default function Table1({ detail, setDetail }) {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer component={Paper} className="table-container">
+        <Table
+          sx={{ maxWidth: 650 }}
+          aria-label="simple table"
+          className="table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>
@@ -69,7 +77,11 @@ export default function Table1({ detail, setDetail }) {
                 />
               </TableCell>
               {head.map((h) => {
-                return <TableCell align="left">{h}</TableCell>;
+                return (
+                  <TableCell align="left">
+                    <strong>{h}</strong>
+                  </TableCell>
+                );
               })}
             </TableRow>
           </TableHead>
@@ -79,18 +91,12 @@ export default function Table1({ detail, setDetail }) {
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                {maincheck ? (
-                  <TableCell>
-                    <Checkbox
-                      onClick={() => CheckOnClick(row.id)}
-                      checked={maincheck && true}
-                    />
-                  </TableCell>
-                ) : (
-                  <TableCell>
-                    <Checkbox onClick={() => CheckOnClick(row.id)} />
-                  </TableCell>
-                )}
+                <TableCell>
+                  <Checkbox
+                    value={row.name}
+                    onClick={() => CheckOnClick(row.id)}
+                  />
+                </TableCell>
 
                 <TableCell component="th" scope="row">
                   {row.name}
@@ -101,9 +107,12 @@ export default function Table1({ detail, setDetail }) {
 
                 <TableCell align="left">
                   <DeleteIcon
+                    style={{ margin: 5 }}
                     onClick={() => DeleteOnClick(row.id, detail, setDetail)}
                   />
-                  <ModeEditOutlinedIcon />
+                  <>
+                    <Editicon row={row} detail={detail} setDetail={setDetail} />
+                  </>
                 </TableCell>
               </TableRow>
             ))}
@@ -114,8 +123,9 @@ export default function Table1({ detail, setDetail }) {
         variant="outlined"
         color="error"
         onClick={() => AllDeleteOnClick(detail, setDetail)}
+        className="DeleteButton"
       >
-        Error
+        DELETE
       </Button>
     </>
   );
