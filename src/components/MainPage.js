@@ -42,6 +42,9 @@ export default function MainPage() {
   };
 
   useEffect(() => {
+    performApi();
+  }, []);
+  useEffect(() => {
     if (searchvalue == "") {
       performApi();
     } else {
@@ -77,15 +80,29 @@ export default function MainPage() {
         />
       </Box>
       {searchvalue == "" ? (
-        <Table1 detail={detail} setDetail={setDetail} />
+        <Table1
+          detail={detail.slice(indexOfFirstPost, indexOfLastDetail)}
+          setDetail={setDetail}
+        />
       ) : (
-        <Table1 detail={searchresult} setDetail={setSearchresult} />
+        <Table1
+          detail={searchresult.slice(indexOfFirstPost, indexOfLastDetail)}
+          setDetail={setSearchresult}
+        />
       )}
-      <Pagination
-        detailsPerPage={detailsPerPage}
-        totalDetails={detail.length}
-        paginate={paginate}
-      />
+      {searchvalue == "" ? (
+        <Pagination
+          detailsPerPage={detailsPerPage}
+          totalDetails={detail.length}
+          paginate={paginate}
+        />
+      ) : (
+        <Pagination
+          detailsPerPage={detailsPerPage}
+          totalDetails={searchresult.length}
+          paginate={paginate}
+        />
+      )}
     </>
   );
 }
